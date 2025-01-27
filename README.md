@@ -1,43 +1,4 @@
-# Olivia Rodrigo Lyrics
 
-### Twitter profile: [@oliviarlyric](https://twitter.com/oliviarlyric)
-(right-click and open in a new tab)
-
-## Table of Contents
-- [Description](#description)
-- [Project Motivation](#project-motivation)
-- [Features](#features)
-- [How to Contribute](#how-to-contribute)
-- [Acknowledgments](#acknowledgments)
-- [Getting Started](#getting-started)
-- [License](#license)
-- [Available Lyrics](#available-lyrics)
-- [Collaboration](#contributors)
-
-## Description
-This repository hosts a Twitter bot project committed to automatically posting lyrics from Olivia Rodrigo's songs. Powered by automation, this bot delivers a daily dose of your favorite Olivia Rodrigo lyrics straight to your Twitter feed. Stay tuned for the emotions, stories, and melodies that make Olivia's music unforgettable!
-
-## Project Motivation
-The Olivia Rodrigo Lyrics Twitter bot was born out of a love for Olivia Rodrigo's music and a desire to share that passion with others. My goal is to create a space where fans can enjoy and engage with Olivia's lyrics on a daily basis, fostering a sense of connection through the emotions and stories encapsulated in her songs.
-
-## Features
-- Automated posting of Olivia Rodrigo's lyrics on Twitter.
-- Regular updates for a continuous stream of heartfelt and relatable content.
-- Available albums: SOUR and GUTS
-- Available singles: Can't Catch Me Now
-
-## How to Contribute
-1. If you encounter any issues or are unable to view specific lyrics, feel free to reach out to me via Twitter DM: [@gabijinx_](https://twitter.com/gabijinx_/) (right-click and open in a new tab).
-2. That's all for now!
-
-## Acknowledgments
-This project is made possible with the help of the following technologies:
-
-- **Python:** The programming language that forms the backbone of this project, providing a robust and versatile environment for development.
-
-- **Requests-OAuthlib:** A library for OAuth support in Python. It simplifies the process of interacting with OAuth-based APIs like Twitter. Special thanks to the Requests-OAuthlib community for their contributions and support.
-
-Special thanks to the open-source community for fostering the development of these tools and making them accessible for projects like mine.
 
 ## Getting Started
 To run the Olivia Rodrigo Lyrics Twitter bot, follow these steps:
