@@ -1,7 +1,14 @@
 from mastodon import Mastodon
-from config import ACCESS_TOKEN
+from dotenv import load_dotenv
+import os
 import random
 from lyrics import lyrics_list
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Get the access token from environment variables
+ACCESS_TOKEN = os.getenv('ACCESS_TOKEN')
 
 def post_lyrics():
     try:

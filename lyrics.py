@@ -1,4 +1,4 @@
-lyrics = [
+lyrics_list = [
           
           # Good Luck, Babe
     "It's fine, it's cool",
