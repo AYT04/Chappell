@@ -1,26 +1,26 @@
 from mastodon import Mastodon
-from config import *
+from config import ACCESS_TOKEN
 import random
-from lyrics import lyrics
+from lyrics import lyrics_list
 
-# lista de letras
-lyrics = lyrics
+def post_lyrics():
+    try:
+        # Select a random index
+        indice_selecionado = random.randint(0, len(lyrics_list) - 1)
 
-def lambda_handler(event, context):
-    # seleciona um índice aleatório
-    indice_selecionado = random.randint(0, len(lyrics) - 1)
+        # Authenticate with Mastodon
+        mastodon = Mastodon(
+            access_token=ACCESS_TOKEN,
+            api_base_url='https://mastodon.social'
+        )
 
-    # autenticação com Mastodon
-    mastodon = Mastodon(
-        access_token=ACCESS_TOKEN,
-        api_base_url='https://mastodon.social'
-        # api_base_url=''
-        # Choose an instance that allows the 'development' tab in settings.
-        # I only know .social allows this.
-    )
+        # Get the text of the toot
+        texto_do_tweet = lyrics_list[indice_selecionado]
 
-    # texto do toot
-    texto_do_tweet = lyrics[indice_selecionado]
+        # Post the toot
+        mastodon.toot(texto_do_tweet)
+    except Exception as e:
+        print(f"Error: {e}")
 
-    # postar!
-    mastodon.toot(texto_do_tweet)
+post_lyrics()
+)
