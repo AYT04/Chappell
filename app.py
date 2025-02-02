@@ -23,4 +23,3 @@ def post_lyrics():
         print(f"Error: {e}")
 
 post_lyrics()
-)
