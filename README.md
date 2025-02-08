@@ -1,6 +1,9 @@
 ## Getting Started
 To run the Chappell Roan Lyrics Mastodon bot, follow these steps:
 
+## Please DM me for inquries.
+## I'm also not doing Twitter because of the API.
+
 1. Clone the repository:
    ```bash
    git clone https://github.com/AYT04/MastodonBot.git
