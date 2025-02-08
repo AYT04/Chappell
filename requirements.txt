@@ -8,3 +8,4 @@ tweepy==4.14.0
 urllib3==2.1.0
 Mastodon.py==1.5.1
 python-dotenv==1.0.0
+schedule==1.1.0
