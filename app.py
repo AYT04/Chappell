@@ -2,7 +2,9 @@ from mastodon import Mastodon
 from dotenv import load_dotenv
 import os
 import random
-from lyrics import lyrics_list
+#from lyrics import lyrics_list
+import schedule
+import time
 
 # Load environment variables from .env file
 load_dotenv()
@@ -29,4 +31,11 @@ def post_lyrics():
     except Exception as e:
         print(f"Error: {e}")
 
-post_lyrics()
+# Schedule the post_lyrics function to run every hour
+schedule.every(1).hours.do(post_lyrics)
+
+# Run indefinitely
+while True:
+    schedule.run_pending()
+    time.sleep(1)
+    
