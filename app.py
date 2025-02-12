@@ -2,8 +2,7 @@ from mastodon import Mastodon
 from dotenv import load_dotenv
 import os
 import random
-#from lyrics import lyrics_list
-import schedule
+from lyrics import lyrics_list
 import time
 
 # Load environment variables from .env file
@@ -28,14 +27,15 @@ def post_lyrics():
 
         # Post the toot
         mastodon.toot(texto_do_tweet)
+        print(f"Posted: {texto_do_tweet}")  # Indicate that a post was made
     except Exception as e:
         print(f"Error: {e}")
 
-# Schedule the post_lyrics function to run every hour
-schedule.every(1).hours.do(post_lyrics)
+def main():
+    while True:
+        post_lyrics()
+        time.sleep(3600)  # Wait for 1 hour (3600 seconds)
 
-# Run indefinitely
-while True:
-    schedule.run_pending()
-    time.sleep(1)
-    
+if __name__ == "__main__":
+    main()
+
