@@ -1,15 +1,14 @@
-## Getting Started
-To run the Chappell Roan Lyrics Mastodon bot, follow these steps:
+## Chappell Mastodon
 
-## Please DM me for inquries.
-## I'm also not doing Twitter because of the API.
+This is a Mastodon bot that posts Chappell Roan's Lyrics, which is currently only three of her songs that I like. Which anyone can add more, or straight out change and switch to whatever artist you'd like.
 
-1. Clone the repository:
+
+1. Git Clone
    ```bash
-   git clone https://github.com/AYT04/MastodonBot.git
+   git clone https://github.com/AYT04/Chappell.git
    ```
    ```bash
-   cd MastodonBot
+   cd Chappell
 3. Create a Virtual Environment (Venv):
    ```bash
    python3 -m venv venv
@@ -32,11 +31,9 @@ To run the Chappell Roan Lyrics Mastodon bot, follow these steps:
 
 ## License
 
+**I would love to license this under GPL, but thats if the original dev is ok with that.**
+
 This project is currently not licensed.
-
-# Available lyrics
-
-**All lyrics are only three of her songs.**
 
 * California
 * Good Luck, Babe
