@@ -1,38 +1,67 @@
-import os
-import requests
 import feedparser
+from googleapiclient.discovery import build
+from googleapiclient.http import MediaFileUpload
+from google_auth_oauthlib.flow import InstalledAppFlow
+from google.auth.transport.requests import Request
+import pickle
+import os.path
+import schedule
+import time
 
-def download_podcast_episodes(rss_url, download_dir):
-    # Parse the RSS feed
-    feed = feedparser.parse(rss_url)
+# python -m venv myenv
+# myenv\Scripts\activate  # on Windows
+# source myenv/bin/activate  # on Linux/Mac
+# pip install feedparser google-api-python-client google-auth-httplib2 google-auth-oauthlib schedule requests
+# pip freeze > requirements.txt
 
-    # Create the download directory if it doesn't exist
-    if not os.path.exists(download_dir):
-        os.makedirs(download_dir)
 
-    # Loop through each episode
-    for entry in feed.entries:
-        # Extract the episode title and media URL
-        episode_title = entry.title
-        media_url = entry.enclosures[0].href
+# RSS feed URL
+rss_feed_url = 'https://ohthatremindsmepod.podbean.com/feed.xml'
 
-        # Create a filename based on the episode title
-        filename = os.path.join(download_dir, f"{episode_title}.mp3")
+# Google Drive API credentials
+creds = None
+if os.path.exists('token.pickle'):
+    with open('token.pickle', 'rb') as token:
+        creds = pickle.load(token)
+if not creds or not creds.valid:
+    if creds and creds.expired and creds.refresh_token:
+        creds.refresh(Request())
+    else:
+        flow = InstalledAppFlow.from_client_secrets_file(
+            'credentials.json', 'https://www.googleapis.com/auth/drive')
+        creds = flow.run_local_server(port=0)
+    with open('token.pickle', 'wb') as token:
+        pickle.dump(creds, token)
 
-        # Download the episode
-        print(f"Downloading {episode_title}...")
-        response = requests.get(media_url, stream=True)
-        if response.status_code == 200:
-            with open(filename, 'wb') as file:
-                for chunk in response.iter_content(chunk_size=8192):
-                    file.write(chunk)
-            print(f"Downloaded {episode_title}")
-        else:
-            print(f"Failed to download {episode_title}")
+# Create Google Drive API client
+drive_service = build('drive', 'v3', credentials=creds)
 
-if __name__ == "__main__":
-    # Replace with the RSS feed URL of the podcast
-    rss_url = "https://ohthatremindsmepod.podbean.com/feed.xml","https://www.youtube.com/feeds/videos.xml?channel_id=UCtMVHI3AJD4Qk4hcbZnI9ZQ"
-    # Replace with the directory where you want to save the episodes
-    download_dir = "./oh"
-    download_podcast_episodes(rss_url, download_dir)
+def download_and_upload_podcast():
+    # Parse RSS feed
+    feed = feedparser.parse(rss_feed_url)
+    latest_episode = feed.entries[0]
+
+    # Download latest episode
+    episode_url = latest_episode.links[0].href
+    episode_title = latest_episode.title
+    import requests
+    response = requests.get(episode_url)
+    with open(episode_title + '.mp3', 'wb') as f:
+        f.write(response.content)
+
+    # Upload episode to Google Drive
+    file_metadata = {'name': episode_title + '.mp3'}
+    media = MediaFileUpload(episode_title + '.mp3', mimetype='audio/mpeg')
+    file = drive_service.files().create(body=file_metadata,
+                                        media_body=media,
+                                        fields='id').execute()
+
+    # Remove downloaded episode
+    os.remove(episode_title + '.mp3')
+
+# Schedule task to run every Tuesday
+schedule.every().tuesday.at("08:00").do(download_and_upload_podcast)  # 8am every Tuesday
+
+while True:
+    schedule.run_pending()
+    time.sleep(1)
