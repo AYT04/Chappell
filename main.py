@@ -16,7 +16,7 @@ import time
 
 
 # RSS feed URL
-rss_feed_url = 'https://ohthatremindsmepod.podbean.com/feed.xml'
+rss_feed_url = 'https://www.ohthatremindsme.com/feed.xml'
 
 # Google Drive API credentials
 creds = None
@@ -60,7 +60,7 @@ def download_and_upload_podcast():
     os.remove(episode_title + '.mp3')
 
 # Schedule task to run every Tuesday
-schedule.every().tuesday.at("08:00").do(download_and_upload_podcast)  # 8am every Tuesday
+schedule.every().tuesday.at("21:00").do(download_and_upload_podcast)  # 8am every Tuesday
 
 while True:
     schedule.run_pending()
