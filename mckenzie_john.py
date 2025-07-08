@@ -32,7 +32,7 @@ def download_podcast_episodes(rss_url, download_dir):
 
 if __name__ == "__main__":
     # Replace with the RSS feed URL of the podcast
-    rss_url = "https://ohthatremindsmepod.podbean.com/feed.xml"
+    rss_url = "https://www.ohthatremindsme.com/feed.xml"
     # Replace with the directory where you want to save the episodes
     download_dir = "./oh"
     download_podcast_episodes(rss_url, download_dir)
